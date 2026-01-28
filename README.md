@@ -24,12 +24,14 @@ python app.py
 - From other devices: http://YOUR_IP_ADDRESS:5000
   - Find your IP: `ipconfig` (Windows) or `ifconfig` (Mac/Linux)
 
-## Configuration
+## Users
 
-Edit `config.py` to change:
-- Password for access
-- Secret key for sessions
+Current users:
+- **De** - password: percy
+- **Michael** - password: percy
 
-## Default Password
-
-Change the password in `config.py` (currently set to "your_password_here")
+To add more users, use `models.add_user()`:
+```python
+from models import add_user
+add_user('FirstName', 'password')
+```

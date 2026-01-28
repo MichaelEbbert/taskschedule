@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from functools import wraps
 import os
+from models import authenticate_user
 
 app = Flask(__name__)
 app.secret_key = 'change-this-to-something-random'  # For session management
@@ -17,16 +18,20 @@ def login_required(f):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # Simple password check (change this!)
-        if request.form.get('password') == 'your_password_here':
+        first_name = request.form.get('first_name')
+        password = request.form.get('password')
+
+        if authenticate_user(first_name, password):
             session['logged_in'] = True
+            session['first_name'] = first_name
             return redirect(url_for('index'))
-        return render_template('login.html', error='Invalid password')
+        return render_template('login.html', error='Invalid credentials')
     return render_template('login.html')
 
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
+    session.pop('first_name', None)
     return redirect(url_for('login'))
 
 @app.route('/')
