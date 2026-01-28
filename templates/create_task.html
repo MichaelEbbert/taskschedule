@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Create Task - Task Schedule{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Create New Task</h2>
+
+    <form method="POST" class="task-form">
+        <div class="form-group">
+            <label for="title">Task Title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Assign To:</label>
+            <div>
+                <input type="radio" id="for_everyone" name="for_everyone" value="1" checked onchange="toggleUserSelection()">
+                <label for="for_everyone">Everyone</label>
+            </div>
+            <div>
+                <input type="radio" id="for_specific" name="for_everyone" value="0" onchange="toggleUserSelection()">
+                <label for="for_specific">Specific Users</label>
+            </div>
+        </div>
+
+        <div class="form-group" id="user_selection" style="display: none;">
+            <label>Select Users:</label>
+            {% for user in users %}
+            <div>
+                <input type="checkbox" id="user_{{ user.id }}" name="user_ids" value="{{ user.id }}">
+                <label for="user_{{ user.id }}">{{ user.first_name }}</label>
+            </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Task</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<script>
+function toggleUserSelection() {
+    const forEveryone = document.getElementById('for_everyone').checked;
+    const userSelection = document.getElementById('user_selection');
+    userSelection.style.display = forEveryone ? 'none' : 'block';
+}
+</script>
+{% endblock %}

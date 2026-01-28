@@ -11,7 +11,13 @@
         <nav>
             <h1>Task Schedule</h1>
             {% if session.logged_in %}
-            <a href="{{ url_for('logout') }}">Logout</a>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('create_task_route') }}">Create Task</a>
+                <a href="{{ url_for('all_tasks') }}">All Tasks</a>
+                <a href="{{ url_for('view_tasks') }}">View by Date</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
             {% endif %}
         </nav>
     </header>

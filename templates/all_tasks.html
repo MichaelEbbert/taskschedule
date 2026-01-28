@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}All Tasks - Task Schedule{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>All Tasks</h2>
+
+    <div class="view-controls">
+        <a href="{{ url_for('all_tasks', view='alphabetical') }}"
+           class="btn {% if view == 'alphabetical' %}btn-primary{% else %}btn-secondary{% endif %}">
+            Alphabetical
+        </a>
+        <a href="{{ url_for('all_tasks', view='chronological') }}"
+           class="btn {% if view == 'chronological' %}btn-primary{% else %}btn-secondary{% endif %}">
+            Chronological
+        </a>
+
+        {% if not show_all and total_pages > 1 %}
+        <a href="{{ url_for('all_tasks', view=view, show_all='1') }}" class="btn btn-secondary">Show All</a>
+        {% endif %}
+    </div>
+
+    <p class="task-count">Total: {{ total_tasks }} tasks</p>
+
+    {% if view == 'alphabetical' %}
+    <ul class="task-list">
+        {% for task in tasks %}
+        <li>
+            <a href="{{ url_for('edit_task_route', task_id=task.id) }}" class="task-link">{{ task.title }}</a>
+            {% if task.schedule_desc %}
+            <span class="schedule-desc">({{ task.schedule_desc }})</span>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <ul class="task-list">
+        {% for task in tasks %}
+        <li>
+            <a href="{{ url_for('edit_task_route', task_id=task.id) }}" class="task-link">{{ task.title }}</a>
+            <span class="task-date">{{ task.date }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if not show_all and total_pages > 1 %}
+    <div class="pagination">
+        {% if page > 1 %}
+        <a href="{{ url_for('all_tasks', view=view, page=page-1) }}" class="btn btn-secondary">Previous</a>
+        {% endif %}
+
+        <span class="page-info">Page {{ page }} of {{ total_pages }}</span>
+
+        {% if page < total_pages %}
+        <a href="{{ url_for('all_tasks', view=view, page=page+1) }}" class="btn btn-secondary">Next</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}View Tasks - Task Schedule{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="no-print">
+        <h2>View Tasks by Date Range</h2>
+
+        <form method="GET" class="date-form">
+            <div class="form-group">
+                <label for="month">Select Month:</label>
+                <input type="month" id="month" name="month" value="{{ start_date.strftime('%Y-%m') }}">
+                <button type="submit" class="btn btn-primary">View Month</button>
+            </div>
+
+            <p>Or enter custom date range:</p>
+
+            <div class="form-group">
+                <label for="start">Start Date (MMDDYYYY):</label>
+                <input type="text" id="start" name="start" placeholder="01152026">
+            </div>
+
+            <div class="form-group">
+                <label for="end">End Date (MMDDYYYY):</label>
+                <input type="text" id="end" name="end" placeholder="01312026">
+            </div>
+
+            <button type="submit" class="btn btn-primary">View Range</button>
+        </form>
+
+        <button onclick="window.print()" class="btn btn-primary">Print</button>
+        <hr>
+    </div>
+
+    <div class="print-view">
+        {% for line in print_lines %}
+        <div class="print-line">{{ line }}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

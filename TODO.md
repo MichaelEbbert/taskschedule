@@ -10,6 +10,12 @@
 
 ### Pre-populate Common Maintenance Tasks
 
+**Weekly:**
+- [ ] Brush cat's teeth (Saturday)
+
+**Twice a month:**
+- [ ] Trim cat nails (1st and 16th)
+
 **Monthly:**
 - [ ] Change HVAC air filters
 - [ ] Test smoke detectors and carbon monoxide alarms
@@ -20,6 +26,7 @@
 - [ ] Clean bathroom
 - [ ] Sanitize kitchen
 - [ ] Sanitize doorknobs
+- [ ] Flea treat cats (1st of month)
 
 **Quarterly (Every 3 months):**
 - [ ] Change furnace filters

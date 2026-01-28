@@ -107,3 +107,219 @@ main {
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
+
+/* Navigation */
+.nav-links {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Day groups on dashboard */
+.day-group {
+    margin-bottom: 2rem;
+}
+
+.day-group h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #2c3e50;
+}
+
+.task-list {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+.task-list li {
+    padding: 0.5rem 0;
+}
+
+.task-link {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.task-link:hover {
+    color: #2c3e50;
+    text-decoration: underline;
+}
+
+.no-tasks {
+    color: #999;
+    font-style: italic;
+    padding-left: 1rem;
+}
+
+/* Forms */
+.task-form, .schedule-form, .date-form {
+    max-width: 600px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group input[type="month"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #34495e;
+}
+
+.btn-secondary {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.btn-small {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+/* Schedule list */
+.schedule-list {
+    list-style: none;
+    padding: 0;
+}
+
+.schedule-list li {
+    padding: 0.75rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* All tasks page */
+.view-controls {
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.task-count {
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.schedule-desc {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.task-date {
+    color: #666;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+.pagination {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.page-info {
+    color: #666;
+}
+
+/* Print view */
+.print-view {
+    font-family: monospace;
+    line-height: 1.4;
+}
+
+.print-line {
+    padding: 0.25rem 0;
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+    }
+
+    header, .no-print {
+        display: none !important;
+    }
+
+    .container {
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .print-view {
+        font-size: 10pt;
+        line-height: 1.2;
+    }
+
+    .print-line {
+        padding: 0;
+        page-break-inside: avoid;
+    }
+
+    .task-link {
+        color: #000;
+        text-decoration: none;
+    }
+
+    @page {
+        margin: 0.5in;
+    }
+}
