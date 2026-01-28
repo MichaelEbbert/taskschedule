@@ -3,7 +3,7 @@
 ## Access Your App
 
 **Domain Name:** http://taskschedule.mebbert.com:5000
-**Public IP:** http://54.160.168.245:5000
+**Elastic IP (Static):** http://100.50.222.238:5000
 
 **Login Credentials:**
 - Username: De / Password: percy
@@ -15,8 +15,8 @@
 ### EC2 Instance
 - Instance ID: i-05582111840d4a971
 - Instance Type: t2.micro (free tier eligible)
-- Public IP: 54.160.168.245
-- Public DNS: ec2-54-160-168-245.compute-1.amazonaws.com
+- Elastic IP (Static): 100.50.222.238
+- Allocation ID: eipalloc-08457e0840e101474
 - Region: us-east-1 (Virginia)
 
 ### Security Group
@@ -34,15 +34,20 @@
 
 ### Route 53 DNS
 - Hosted Zone: mebbert.com (Z040520630S50ZVHYL1YA)
-- DNS Record: taskschedule.mebbert.com → 54.160.168.245 (A record)
+- DNS Record: taskschedule.mebbert.com → 100.50.222.238 (A record)
 - TTL: 300 seconds (5 minutes)
+
+### Elastic IP
+- Allocation ID: eipalloc-08457e0840e101474
+- Static IP: 100.50.222.238
+- **Note:** This IP is permanent and will not change even if the instance is stopped/restarted
 
 ## Connecting via SSH
 
 ```bash
 ssh -i taskschedule-key.pem ec2-user@taskschedule.mebbert.com
 # Or using IP:
-ssh -i taskschedule-key.pem ec2-user@54.160.168.245
+ssh -i taskschedule-key.pem ec2-user@100.50.222.238
 ```
 
 ## App Management
