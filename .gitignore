@@ -23,3 +23,9 @@ ENV/
 # OS
 .DS_Store
 Thumbs.db
+
+# AWS / Deployment
+*.pem
+*.msi
+user-data.sh
+.aws/

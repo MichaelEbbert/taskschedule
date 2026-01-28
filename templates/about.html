@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}About - Task Schedule{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>About Task Schedule</h2>
+
+    <p>Task Schedule is a lightweight, flexible web application designed for managing recurring tasks and schedules. Built for simplicity and ease of use, it runs on your local network or in the cloud, making it accessible from any device.</p>
+
+    <h3>Technologies Used</h3>
+
+    <h4>Backend</h4>
+    <ul>
+        <li><strong>Python</strong> - Primary programming language for the application logic</li>
+        <li><strong>Flask</strong> - Lightweight web framework that powers the application routes and request handling</li>
+        <li><strong>SQLite</strong> - Embedded database engine for storing tasks, schedules, and user data with zero configuration</li>
+    </ul>
+
+    <h4>Frontend</h4>
+    <ul>
+        <li><strong>HTML</strong> - Semantic markup for structuring the application interface</li>
+        <li><strong>CSS</strong> - Custom stylesheets for responsive design and print-optimized layouts</li>
+        <li><strong>JavaScript</strong> - Client-side interactivity for dynamic form fields and user interface enhancements</li>
+        <li><strong>Jinja2</strong> - Server-side templating engine integrated with Flask for generating dynamic HTML</li>
+    </ul>
+
+    <h4>Cloud Infrastructure</h4>
+    <ul>
+        <li><strong>Amazon Web Services (AWS)</strong> - Cloud computing platform hosting the production deployment</li>
+        <li><strong>Amazon EC2</strong> - Elastic Compute Cloud instances running the Flask application server</li>
+        <li><strong>AWS VPC</strong> - Virtual Private Cloud for network isolation and security group configuration</li>
+        <li><strong>Amazon Linux</strong> - Operating system running on the EC2 instances</li>
+    </ul>
+
+    <h4>Development & Deployment</h4>
+    <ul>
+        <li><strong>Git</strong> - Distributed version control system for tracking code changes</li>
+        <li><strong>GitHub</strong> - Code repository hosting and collaboration platform</li>
+        <li><strong>AWS CLI</strong> - Command-line tools for automating AWS resource provisioning</li>
+        <li><strong>Systemd</strong> - Service manager ensuring the application runs continuously and restarts on reboot</li>
+    </ul>
+
+    <h4>AI-Assisted Development</h4>
+    <ul>
+        <li><strong>Claude Code</strong> - AI-powered development tool by Anthropic that assisted in building this application</li>
+        <li>Claude Code helped with:
+            <ul>
+                <li>Application architecture and design decisions</li>
+                <li>Database schema design supporting 15 different schedule frequency patterns</li>
+                <li>Full-stack implementation from backend logic to frontend templates</li>
+                <li>AWS infrastructure provisioning and deployment automation</li>
+                <li>Code quality improvements and best practices</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Key Features</h3>
+    <ul>
+        <li><strong>Flexible Scheduling</strong> - Supports 15 different frequency patterns including daily, weekly, monthly, seasonal, and custom intervals</li>
+        <li><strong>User Management</strong> - Multi-user support with task assignment capabilities (everyone or specific users)</li>
+        <li><strong>Multiple Views</strong> - Alphabetical task listing, chronological timeline, and custom date range views</li>
+        <li><strong>Print Optimization</strong> - Clean, lean print layouts designed for standard printer output</li>
+        <li><strong>Responsive Design</strong> - Works seamlessly on desktop computers, tablets, and mobile phones</li>
+        <li><strong>Network Accessible</strong> - Run on local network or deploy to the cloud for internet access</li>
+    </ul>
+
+    <h3>Schedule Patterns Supported</h3>
+    <ol>
+        <li>Interval-based: Every X days/weeks/months starting from a specific date</li>
+        <li>Weekly on specific day (e.g., every Tuesday)</li>
+        <li>Ordinal day of month (e.g., first Saturday of each month)</li>
+        <li>Ordinal day of even/odd months (e.g., first Saturday of even months)</li>
+        <li>Monthly on specific date (e.g., 15th of each month)</li>
+        <li>First or last day of each month</li>
+        <li>First or last day of every X months</li>
+        <li>X times per month</li>
+        <li>Yearly in specific week of specific month</li>
+        <li>Yearly on specific date (e.g., March 15 every year)</li>
+        <li>Seasonal tasks (Spring, Summer, Fall, Winter)</li>
+        <li>One-time tasks on specific dates</li>
+    </ol>
+
+    <h3>Architecture Philosophy</h3>
+    <p>This application embraces simplicity and pragmatism. Rather than adding layers of abstraction and complexity, it uses straightforward Python code, minimal dependencies, and proven technologies. The database schema is designed to be flexible enough to handle complex scheduling patterns while remaining easy to understand and modify.</p>
+
+    <p>The lightweight architecture means fast page loads, low resource usage, and easy deployment. The entire application runs efficiently on a single small EC2 instance, making it cost-effective for personal or small team use.</p>
+
+    <h3>Educational Purpose</h3>
+    <p>This application serves as a practical example of full-stack web development, demonstrating:
+        <ul>
+            <li>RESTful web application design patterns</li>
+            <li>Database-driven application architecture</li>
+            <li>User authentication and session management</li>
+            <li>Cloud deployment and infrastructure automation</li>
+            <li>Responsive web design principles</li>
+            <li>AI-assisted software development workflows</li>
+        </ul>
+    </p>
+
+    <p class="about-footer">Built with Flask, deployed on AWS, and crafted with assistance from Claude Code.</p>
+</div>
+{% endblock %}

@@ -31,6 +31,7 @@ def init_db():
             title TEXT NOT NULL,
             description TEXT,
             for_everyone BOOLEAN DEFAULT 1,
+            created_by TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
@@ -103,16 +104,24 @@ def add_user(first_name, password):
     print(f"User '{first_name}' added successfully")
 
 def authenticate_user(first_name, password):
-    """Check if user credentials are valid (case-insensitive password)"""
+    """Check if user credentials are valid (case-insensitive username and password)"""
     conn = get_db()
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM users WHERE first_name = ?', (first_name,))
+    cursor.execute('SELECT * FROM users WHERE LOWER(first_name) = LOWER(?)', (first_name,))
     user = cursor.fetchone()
     conn.close()
 
     if user and user['password'].lower() == password.lower():
         return True
     return False
+
+def get_ordinal(n):
+    """Convert number to ordinal string (1st, 2nd, 3rd, etc.)"""
+    if 10 <= n % 100 <= 20:
+        suffix = 'th'
+    else:
+        suffix = {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')
+    return f"{n}{suffix}"
 
 def normalize_task_title(title):
     """Normalize task title to sentence case, preserving mid-sentence all-caps words"""
@@ -159,14 +168,14 @@ def get_all_users():
     conn.close()
     return users
 
-def create_task(title, description, for_everyone, user_ids=None):
+def create_task(title, description, for_everyone, user_ids=None, created_by=None):
     """Create a new task"""
     title = normalize_task_title(title)
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute(
-        'INSERT INTO tasks (title, description, for_everyone) VALUES (?, ?, ?)',
-        (title, description, for_everyone)
+        'INSERT INTO tasks (title, description, for_everyone, created_by) VALUES (?, ?, ?, ?)',
+        (title, description, for_everyone, created_by)
     )
     task_id = cursor.lastrowid
 
@@ -291,7 +300,7 @@ def get_schedule_description(schedule):
     elif st == 'ordinal_bimonthly':
         return f"{schedule['ordinal']} {schedule['day_of_week']} of {schedule['even_odd_months']} months"
     elif st == 'monthly_date':
-        return f"monthly on the {schedule['day_of_month']}th"
+        return f"monthly on the {get_ordinal(schedule['day_of_month'])}"
     elif st == 'first_of_month':
         return "first day of each month"
     elif st == 'last_of_month':

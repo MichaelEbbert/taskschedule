@@ -98,6 +98,12 @@
 
         <button type="submit" class="btn btn-primary">Add Schedule</button>
     </form>
+
+    {% if task.created_by %}
+    <div class="task-creator">
+        <p>Created by: {{ task.created_by.capitalize() }}</p>
+    </div>
+    {% endif %}
 </div>
 
 <script>

@@ -6,7 +6,7 @@ from models import (
     authenticate_user, get_all_users, create_task, update_task, get_task,
     get_task_assignments, delete_task, add_schedule, get_schedules, delete_schedule,
     get_schedule_description, get_all_tasks_alphabetical, get_tasks_for_date_range,
-    calculate_next_occurrence
+    calculate_next_occurrence, get_ordinal
 )
 
 app = Flask(__name__)
@@ -79,7 +79,8 @@ def create_task_route():
         if not for_everyone:
             user_ids = request.form.getlist('user_ids')
 
-        task_id = create_task(title, description, for_everyone, user_ids)
+        created_by = session.get('first_name')
+        task_id = create_task(title, description, for_everyone, user_ids, created_by)
 
         # Handle schedules (we'll add UI for this later, for now just redirect)
         return redirect(url_for('edit_task_route', task_id=task_id))
@@ -256,6 +257,16 @@ def view_tasks():
 
     return render_template('view_tasks.html', print_lines=print_lines,
                           start_date=start_date, end_date=end_date)
+
+@app.route('/about')
+@login_required
+def about():
+    return render_template('about.html')
+
+@app.context_processor
+def utility_processor():
+    """Make utility functions available to all templates"""
+    return dict(get_ordinal=get_ordinal)
 
 if __name__ == '__main__':
     # Run on all network interfaces so other devices can access

@@ -322,4 +322,27 @@ main {
     @page {
         margin: 0.5in;
     }
+
+    .task-creator {
+        display: none;
+    }
+}
+
+/* Task creator info */
+.task-creator {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* About page */
+.about-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+    color: #666;
+    font-style: italic;
+    text-align: center;
 }
