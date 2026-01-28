@@ -33,13 +33,15 @@
 
         <div class="form-group" id="user_selection" style="display: {% if task.for_everyone %}none{% else %}block{% endif %};">
             <label>Select Users:</label>
+            <div class="user-grid">
             {% for user in users %}
-            <div>
-                <input type="checkbox" id="user_{{ user.id }}" name="user_ids" value="{{ user.id }}"
-                       {% if user.id in assigned_users %}checked{% endif %}>
-                <label for="user_{{ user.id }}">{{ user.first_name }}</label>
-            </div>
+                <div class="user-checkbox">
+                    <input type="checkbox" id="user_{{ user.id }}" name="user_ids" value="{{ user.id }}"
+                           {% if user.id in assigned_users %}checked{% endif %}>
+                    <label for="user_{{ user.id }}">{{ user.first_name }}</label>
+                </div>
             {% endfor %}
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Update Task</button>
@@ -129,6 +131,10 @@ function updateScheduleForm() {
             <div class="form-group">
                 <label for="start_date">Start Date (YYYY-MM-DD):</label>
                 <input type="date" id="start_date" name="start_date" required>
+            </div>
+            <div class="form-group">
+                <label for="end_date">End Date (optional, YYYY-MM-DD):</label>
+                <input type="date" id="end_date" name="end_date">
             </div>
         `;
     } else if (scheduleType === 'weekly') {
@@ -226,6 +232,10 @@ function updateScheduleForm() {
             <div class="form-group">
                 <label for="start_date">Start Date (YYYY-MM-DD):</label>
                 <input type="date" id="start_date" name="start_date" required>
+            </div>
+            <div class="form-group">
+                <label for="end_date">End Date (optional, YYYY-MM-DD):</label>
+                <input type="date" id="end_date" name="end_date">
             </div>
         `;
     } else if (scheduleType === 'times_per_month') {

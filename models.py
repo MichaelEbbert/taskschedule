@@ -60,6 +60,7 @@ def init_db():
             -- For interval-based schedules (every X days/weeks/months)
             interval INTEGER,
             start_date DATE,
+            end_date DATE,
 
             -- For day-of-week based schedules
             day_of_week TEXT,
@@ -305,11 +306,20 @@ def get_schedule_description(schedule):
     st = schedule['schedule_type']
 
     if st == 'interval_days':
-        return f"every {schedule['interval']} days"
+        desc = f"every {schedule['interval']} days"
+        if schedule.get('end_date'):
+            desc += f" (until {schedule['end_date']})"
+        return desc
     elif st == 'interval_weeks':
-        return f"every {schedule['interval']} weeks"
+        desc = f"every {schedule['interval']} weeks"
+        if schedule.get('end_date'):
+            desc += f" (until {schedule['end_date']})"
+        return desc
     elif st == 'interval_months':
-        return f"every {schedule['interval']} months"
+        desc = f"every {schedule['interval']} months"
+        if schedule.get('end_date'):
+            desc += f" (until {schedule['end_date']})"
+        return desc
     elif st == 'weekly':
         return f"weekly on {schedule['day_of_week']}"
     elif st == 'ordinal_monthly':
@@ -373,6 +383,11 @@ def calculate_next_occurrence(schedule, from_date):
             return start
         interval = schedule['interval']
         next_occ = start + timedelta(days=((days_diff // interval) + 1) * interval)
+        # Check end_date if specified
+        if schedule.get('end_date'):
+            end = datetime.strptime(schedule['end_date'], '%Y-%m-%d').date()
+            if next_occ > end:
+                return None
         return next_occ
 
     elif st == 'interval_weeks':
@@ -383,6 +398,11 @@ def calculate_next_occurrence(schedule, from_date):
         interval = schedule['interval']
         weeks = (days_diff // 7) // interval + 1
         next_occ = start + timedelta(weeks=weeks * interval)
+        # Check end_date if specified
+        if schedule.get('end_date'):
+            end = datetime.strptime(schedule['end_date'], '%Y-%m-%d').date()
+            if next_occ > end:
+                return None
         return next_occ
 
     elif st == 'interval_months':
@@ -395,6 +415,11 @@ def calculate_next_occurrence(schedule, from_date):
         next_year = start.year + (start.month + next_month_count - 1) // 12
         next_month = (start.month + next_month_count - 1) % 12 + 1
         next_occ = datetime(next_year, next_month, start.day).date()
+        # Check end_date if specified
+        if schedule.get('end_date'):
+            end = datetime.strptime(schedule['end_date'], '%Y-%m-%d').date()
+            if next_occ > end:
+                return None
         return next_occ
 
     elif st == 'weekly':

@@ -123,6 +123,9 @@ def edit_task_route(task_id):
             if schedule_type in ['interval_days', 'interval_weeks', 'interval_months']:
                 kwargs['interval'] = int(request.form.get('interval'))
                 kwargs['start_date'] = request.form.get('start_date')
+                end_date = request.form.get('end_date')
+                if end_date:
+                    kwargs['end_date'] = end_date
 
             elif schedule_type == 'weekly':
                 kwargs['day_of_week'] = request.form.get('day_of_week')
@@ -143,6 +146,9 @@ def edit_task_route(task_id):
                 kwargs['first_or_last'] = request.form.get('first_or_last')
                 kwargs['interval'] = int(request.form.get('interval'))
                 kwargs['start_date'] = request.form.get('start_date')
+                end_date = request.form.get('end_date')
+                if end_date:
+                    kwargs['end_date'] = end_date
 
             elif schedule_type == 'times_per_month':
                 kwargs['times_count'] = int(request.form.get('times_count'))
