@@ -103,13 +103,52 @@ def add_user(first_name, password):
     print(f"User '{first_name}' added successfully")
 
 def authenticate_user(first_name, password):
-    """Check if user credentials are valid"""
+    """Check if user credentials are valid (case-insensitive password)"""
     conn = get_db()
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM users WHERE first_name = ? AND password = ?', (first_name, password))
+    cursor.execute('SELECT * FROM users WHERE first_name = ?', (first_name,))
     user = cursor.fetchone()
     conn.close()
-    return user is not None
+
+    if user and user['password'].lower() == password.lower():
+        return True
+    return False
+
+def normalize_task_title(title):
+    """Normalize task title to sentence case, preserving mid-sentence all-caps words"""
+    if not title:
+        return title
+
+    # Check if entire title is all caps (only considering letters)
+    letters = [c for c in title if c.isalpha()]
+    if letters and all(c.isupper() for c in letters):
+        # All caps - convert to pure sentence case
+        return title[0].upper() + title[1:].lower()
+
+    # Not all caps - preserve mid-sentence all-caps words
+    words = title.split()
+    if not words:
+        return title
+
+    result = []
+    for i, word in enumerate(words):
+        if i == 0:
+            # First word - sentence case
+            if len(word) > 0:
+                result.append(word[0].upper() + word[1:].lower())
+            else:
+                result.append(word)
+        else:
+            # Mid-sentence word
+            word_letters = [c for c in word if c.isalpha()]
+            if word_letters and all(c.isupper() for c in word_letters):
+                # All caps word - preserve it
+                result.append(word)
+            else:
+                # Not all caps - lowercase it
+                result.append(word.lower())
+
+    return ' '.join(result)
 
 def get_all_users():
     """Get all users"""
@@ -122,6 +161,7 @@ def get_all_users():
 
 def create_task(title, description, for_everyone, user_ids=None):
     """Create a new task"""
+    title = normalize_task_title(title)
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute(
@@ -143,6 +183,7 @@ def create_task(title, description, for_everyone, user_ids=None):
 
 def update_task(task_id, title, description, for_everyone, user_ids=None):
     """Update an existing task"""
+    title = normalize_task_title(title)
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute(
