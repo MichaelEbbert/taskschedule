@@ -237,7 +237,11 @@ def view_tasks():
     end_str = request.args.get('end')
     month_str = request.args.get('month')
 
-    if month_str:
+    # Check custom date range FIRST (takes precedence over month selector)
+    if start_str and end_str:
+        start_date = datetime.strptime(start_str, '%m%d%Y').date()
+        end_date = datetime.strptime(end_str, '%m%d%Y').date()
+    elif month_str:
         # Month format: YYYY-MM
         year, month = map(int, month_str.split('-'))
         start_date = datetime(year, month, 1).date()
@@ -245,9 +249,6 @@ def view_tasks():
             end_date = datetime(year + 1, 1, 1).date() - timedelta(days=1)
         else:
             end_date = datetime(year, month + 1, 1).date() - timedelta(days=1)
-    elif start_str and end_str:
-        start_date = datetime.strptime(start_str, '%m%d%Y').date()
-        end_date = datetime.strptime(end_str, '%m%d%Y').date()
     else:
         # Default to current month
         today = datetime.now().date()
