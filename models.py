@@ -307,17 +307,17 @@ def get_schedule_description(schedule):
 
     if st == 'interval_days':
         desc = f"every {schedule['interval']} days"
-        if schedule.get('end_date'):
+        if schedule['end_date']:
             desc += f" (until {schedule['end_date']})"
         return desc
     elif st == 'interval_weeks':
         desc = f"every {schedule['interval']} weeks"
-        if schedule.get('end_date'):
+        if schedule['end_date']:
             desc += f" (until {schedule['end_date']})"
         return desc
     elif st == 'interval_months':
         desc = f"every {schedule['interval']} months"
-        if schedule.get('end_date'):
+        if schedule['end_date']:
             desc += f" (until {schedule['end_date']})"
         return desc
     elif st == 'weekly':
@@ -384,7 +384,7 @@ def calculate_next_occurrence(schedule, from_date):
         interval = schedule['interval']
         next_occ = start + timedelta(days=((days_diff // interval) + 1) * interval)
         # Check end_date if specified
-        if schedule.get('end_date'):
+        if schedule['end_date']:
             end = datetime.strptime(schedule['end_date'], '%Y-%m-%d').date()
             if next_occ > end:
                 return None
@@ -399,7 +399,7 @@ def calculate_next_occurrence(schedule, from_date):
         weeks = (days_diff // 7) // interval + 1
         next_occ = start + timedelta(weeks=weeks * interval)
         # Check end_date if specified
-        if schedule.get('end_date'):
+        if schedule['end_date']:
             end = datetime.strptime(schedule['end_date'], '%Y-%m-%d').date()
             if next_occ > end:
                 return None
@@ -416,7 +416,7 @@ def calculate_next_occurrence(schedule, from_date):
         next_month = (start.month + next_month_count - 1) % 12 + 1
         next_occ = datetime(next_year, next_month, start.day).date()
         # Check end_date if specified
-        if schedule.get('end_date'):
+        if schedule['end_date']:
             end = datetime.strptime(schedule['end_date'], '%Y-%m-%d').date()
             if next_occ > end:
                 return None
