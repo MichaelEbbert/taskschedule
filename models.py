@@ -168,6 +168,23 @@ def get_all_users():
     conn.close()
     return users
 
+def get_user_by_id(user_id):
+    """Get a user by ID"""
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM users WHERE id = ?', (user_id,))
+    user = cursor.fetchone()
+    conn.close()
+    return user
+
+def update_user_password(user_id, new_password):
+    """Update a user's password"""
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute('UPDATE users SET password = ? WHERE id = ?', (new_password, user_id))
+    conn.commit()
+    conn.close()
+
 def create_task(title, description, for_everyone, user_ids=None, created_by=None):
     """Create a new task"""
     title = normalize_task_title(title)

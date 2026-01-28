@@ -6,7 +6,7 @@ from models import (
     authenticate_user, get_all_users, create_task, update_task, get_task,
     get_task_assignments, delete_task, add_schedule, get_schedules, delete_schedule,
     get_schedule_description, get_all_tasks_alphabetical, get_tasks_for_date_range,
-    calculate_next_occurrence, get_ordinal
+    calculate_next_occurrence, get_ordinal, get_user_by_id, update_user_password
 )
 
 app = Flask(__name__)
@@ -18,6 +18,17 @@ def login_required(f):
     def decorated_function(*args, **kwargs):
         if 'logged_in' not in session:
             return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+# Admin auth decorator
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'logged_in' not in session:
+            return redirect(url_for('login'))
+        if session.get('first_name', '').lower() != 'admin':
+            return redirect(url_for('index'))
         return f(*args, **kwargs)
     return decorated_function
 
@@ -262,6 +273,27 @@ def view_tasks():
 @login_required
 def about():
     return render_template('about.html')
+
+@app.route('/admin/users')
+@admin_required
+def admin_users():
+    users = get_all_users()
+    return render_template('admin_users.html', users=users)
+
+@app.route('/admin/users/<int:user_id>/edit', methods=['GET', 'POST'])
+@admin_required
+def edit_user(user_id):
+    user = get_user_by_id(user_id)
+    if not user:
+        return redirect(url_for('admin_users'))
+
+    if request.method == 'POST':
+        new_password = request.form.get('password')
+        if new_password:
+            update_user_password(user_id, new_password)
+            return redirect(url_for('admin_users'))
+
+    return render_template('edit_user.html', user=user)
 
 @app.context_processor
 def utility_processor():

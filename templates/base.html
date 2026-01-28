@@ -17,6 +17,9 @@
                 <a href="{{ url_for('all_tasks') }}">All Tasks</a>
                 <a href="{{ url_for('view_tasks') }}">View by Date</a>
                 <a href="{{ url_for('about') }}">About</a>
+                {% if session.first_name and session.first_name.lower() == 'admin' %}
+                <a href="{{ url_for('admin_users') }}">Admin</a>
+                {% endif %}
                 <a href="{{ url_for('logout') }}">Logout</a>
             </div>
             {% endif %}
