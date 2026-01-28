@@ -2,11 +2,13 @@
 
 ## Access Your App
 
-**Public URL:** http://54.160.168.245:5000
+**Domain Name:** http://taskschedule.mebbert.com:5000
+**Public IP:** http://54.160.168.245:5000
 
 **Login Credentials:**
 - Username: De / Password: percy
 - Username: Michael / Password: percy
+- Plus 13 additional users (see add_new_users.py) with password: claude101
 
 ## AWS Resources Created
 
@@ -30,9 +32,16 @@
 - Private Key File: `taskschedule-key.pem` (in project directory)
 - **IMPORTANT:** Keep this file secure! Anyone with this key can access your server.
 
+### Route 53 DNS
+- Hosted Zone: mebbert.com (Z040520630S50ZVHYL1YA)
+- DNS Record: taskschedule.mebbert.com → 54.160.168.245 (A record)
+- TTL: 300 seconds (5 minutes)
+
 ## Connecting via SSH
 
 ```bash
+ssh -i taskschedule-key.pem ec2-user@taskschedule.mebbert.com
+# Or using IP:
 ssh -i taskschedule-key.pem ec2-user@54.160.168.245
 ```
 
