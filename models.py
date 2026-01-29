@@ -532,7 +532,10 @@ def calculate_next_occurrence(schedule, from_date):
             return datetime(next_year, next_month, last_day).date()
 
     elif st == 'one_time':
-        return datetime.strptime(schedule['specific_date'], '%Y-%m-%d').date()
+        specific = datetime.strptime(schedule['specific_date'], '%Y-%m-%d').date()
+        if from_date <= specific:
+            return specific
+        return None
 
     return None
 
