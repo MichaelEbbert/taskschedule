@@ -28,8 +28,9 @@
         {% for task in tasks %}
         <li>
             <a href="{{ url_for('edit_task_route', task_id=task.id) }}" class="task-link">{{ task.title }}</a>
+            <span class="task-assignment">({{ task.assigned_to }})</span>
             {% if task.schedule_desc %}
-            <span class="schedule-desc">({{ task.schedule_desc }})</span>
+            <span class="schedule-desc"> - {{ task.schedule_desc }}</span>
             {% endif %}
         </li>
         {% endfor %}
@@ -39,7 +40,8 @@
         {% for task in tasks %}
         <li>
             <a href="{{ url_for('edit_task_route', task_id=task.id) }}" class="task-link">{{ task.title }}</a>
-            <span class="task-date">{{ task.date }}</span>
+            <span class="task-assignment">({{ task.assigned_to }})</span>
+            <span class="task-date"> - {{ task.date }}</span>
         </li>
         {% endfor %}
     </ul>

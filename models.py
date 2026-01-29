@@ -1,7 +1,27 @@
 import sqlite3
+import shutil
+import os
 from datetime import datetime, timedelta
 from calendar import monthrange
 from config import Config
+
+def backup_database():
+    """Rotate database backups on startup (bak5 ← bak4 ← bak3 ← bak2 ← bak1 ← database.db)"""
+    db_path = Config.DATABASE
+
+    if not os.path.exists(db_path):
+        return  # No database to backup yet
+
+    # Rotate existing backups (starting from oldest)
+    for i in range(4, 0, -1):
+        old_backup = f"{db_path}.bak{i}"
+        new_backup = f"{db_path}.bak{i+1}"
+        if os.path.exists(old_backup):
+            shutil.copy2(old_backup, new_backup)
+
+    # Create bak1 from current database
+    shutil.copy2(db_path, f"{db_path}.bak1")
+    print(f"Database backed up: {db_path}.bak1")
 
 def get_db():
     """Get database connection"""
@@ -360,13 +380,31 @@ def get_all_tasks_alphabetical():
 
     task_list = []
     for task in tasks:
+        # Get assignment info
+        if task['for_everyone']:
+            assigned_to = 'Everyone'
+        else:
+            assigned_users = get_task_assignments(task['id'])
+            if assigned_users:
+                # Get user names
+                user_names = []
+                for user_id in assigned_users:
+                    cursor.execute('SELECT first_name FROM users WHERE id = ?', (user_id,))
+                    user = cursor.fetchone()
+                    if user:
+                        user_names.append(user['first_name'])
+                assigned_to = ', '.join(user_names)
+            else:
+                assigned_to = 'Nobody'
+
         schedules = get_schedules(task['id'])
         schedule_desc = ', '.join([get_schedule_description(s) for s in schedules])
         task_list.append({
             'id': task['id'],
             'title': task['title'],
             'description': task['description'],
-            'schedule_desc': schedule_desc
+            'schedule_desc': schedule_desc,
+            'assigned_to': assigned_to
         })
 
     conn.close()
@@ -487,6 +525,23 @@ def get_tasks_for_date_range(start_date, end_date):
     occurrences = []
 
     for task in tasks:
+        # Get assignment info
+        if task['for_everyone']:
+            assigned_to = 'Everyone'
+        else:
+            assigned_users = get_task_assignments(task['id'])
+            if assigned_users:
+                # Get user names
+                user_names = []
+                for user_id in assigned_users:
+                    cursor.execute('SELECT first_name FROM users WHERE id = ?', (user_id,))
+                    user = cursor.fetchone()
+                    if user:
+                        user_names.append(user['first_name'])
+                assigned_to = ', '.join(user_names)
+            else:
+                assigned_to = 'Nobody'
+
         schedules = get_schedules(task['id'])
         for schedule in schedules:
             current_date = start_date
@@ -496,7 +551,8 @@ def get_tasks_for_date_range(start_date, end_date):
                     occurrences.append({
                         'date': next_occ,
                         'task_id': task['id'],
-                        'task_title': task['title']
+                        'task_title': task['title'],
+                        'assigned_to': assigned_to
                     })
                     current_date = next_occ + timedelta(days=1)
                 else:

@@ -30,13 +30,19 @@
         </div>
 
         <div class="form-group" id="user_selection" style="display: none;">
-            <label>Select Users:</label>
+            <label onclick="toggleUserGrid()" style="cursor: pointer;">
+                Select Users: <span id="user_grid_toggle">▼</span>
+            </label>
+            <div class="user-grid" id="user_grid">
             {% for user in users %}
-            <div>
-                <input type="checkbox" id="user_{{ user.id }}" name="user_ids" value="{{ user.id }}">
-                <label for="user_{{ user.id }}">{{ user.first_name }}</label>
-            </div>
+                {% if user.first_name.lower() != 'admin' %}
+                <div class="user-checkbox">
+                    <input type="checkbox" id="user_{{ user.id }}" name="user_ids" value="{{ user.id }}">
+                    <label for="user_{{ user.id }}">{{ user.first_name }}</label>
+                </div>
+                {% endif %}
             {% endfor %}
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Create Task</button>
@@ -49,6 +55,18 @@ function toggleUserSelection() {
     const forEveryone = document.getElementById('for_everyone').checked;
     const userSelection = document.getElementById('user_selection');
     userSelection.style.display = forEveryone ? 'none' : 'block';
+}
+
+function toggleUserGrid() {
+    const userGrid = document.getElementById('user_grid');
+    const toggleIcon = document.getElementById('user_grid_toggle');
+    if (userGrid.style.display === 'none') {
+        userGrid.style.display = 'grid';
+        toggleIcon.textContent = '▼';
+    } else {
+        userGrid.style.display = 'none';
+        toggleIcon.textContent = '►';
+    }
 }
 </script>
 {% endblock %}

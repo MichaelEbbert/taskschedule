@@ -6,7 +6,8 @@ from models import (
     authenticate_user, get_all_users, create_task, update_task, get_task,
     get_task_assignments, delete_task, add_schedule, get_schedules, delete_schedule,
     get_schedule_description, get_all_tasks_alphabetical, get_tasks_for_date_range,
-    calculate_next_occurrence, get_ordinal, get_user_by_id, update_user_password
+    calculate_next_occurrence, get_ordinal, get_user_by_id, update_user_password,
+    backup_database
 )
 
 app = Flask(__name__)
@@ -216,7 +217,8 @@ def all_tasks():
             tasks.append({
                 'id': occ['task_id'],
                 'title': occ['task_title'],
-                'date': occ['date'].strftime('%m/%d/%Y')
+                'date': occ['date'].strftime('%m/%d/%Y'),
+                'assigned_to': occ['assigned_to']
             })
 
     total_tasks = len(tasks)
@@ -271,7 +273,7 @@ def view_tasks():
     for occ in occurrences:
         date_str = occ['date'].strftime('%m/%d/%Y')
         day_str = occ['date'].strftime('%a').upper()
-        print_lines.append(f"{date_str} {day_str} {occ['task_title']}")
+        print_lines.append(f"{date_str} {day_str} {occ['task_title']} ({occ['assigned_to']})")
 
     return render_template('view_tasks.html', print_lines=print_lines,
                           start_date=start_date, end_date=end_date)
@@ -308,5 +310,8 @@ def utility_processor():
     return dict(get_ordinal=get_ordinal)
 
 if __name__ == '__main__':
+    # Backup database before starting
+    backup_database()
+
     # Run on all network interfaces so other devices can access
     app.run(host='0.0.0.0', port=5000, debug=True)

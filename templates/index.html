@@ -11,7 +11,10 @@
         <h3>{{ day.data.day_name }} {{ day.data.date_str }}</h3>
         <ul class="task-list">
             {% for task in day.data.tasks %}
-            <li><a href="{{ url_for('edit_task_route', task_id=task.task_id) }}" class="task-link">{{ task.task_title }}</a></li>
+            <li>
+                <a href="{{ url_for('edit_task_route', task_id=task.task_id) }}" class="task-link">{{ task.task_title }}</a>
+                <span class="task-assignment">({{ task.assigned_to }})</span>
+            </li>
             {% endfor %}
         </ul>
     </div>
