@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from functools import wraps
 from datetime import datetime, timedelta
 import os
+import logging
+from logging.handlers import RotatingFileHandler
+import time
 from models import (
     authenticate_user, get_all_users, create_task, update_task, get_task,
     get_task_assignments, delete_task, add_schedule, get_schedules, delete_schedule,
@@ -13,11 +16,61 @@ from models import (
 app = Flask(__name__)
 app.secret_key = 'change-this-to-something-random'  # For session management
 
+# Configure logging
+log_formatter = logging.Formatter(
+    '%(asctime)s [%(levelname)s] [%(name)s] %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+
+# File handler with rotation (10MB max, keep 5 backups)
+file_handler = RotatingFileHandler('app.log', maxBytes=10*1024*1024, backupCount=5)
+file_handler.setFormatter(log_formatter)
+file_handler.setLevel(logging.DEBUG)
+
+# Console handler
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(log_formatter)
+console_handler.setLevel(logging.INFO)
+
+# Configure root logger
+logging.basicConfig(
+    level=logging.DEBUG,
+    handlers=[file_handler, console_handler]
+)
+
+logger = logging.getLogger(__name__)
+logger.info("="*60)
+logger.info("Flask application starting up")
+logger.info("="*60)
+
+# Request timing decorator
+def log_timing(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        start_time = time.time()
+        route_name = f.__name__
+        user = session.get('first_name', 'anonymous')
+
+        logger.info(f">>> REQUEST START: {route_name} | User: {user} | Method: {request.method}")
+
+        try:
+            result = f(*args, **kwargs)
+            elapsed = time.time() - start_time
+            logger.info(f"<<< REQUEST END: {route_name} | Duration: {elapsed:.3f}s")
+            return result
+        except Exception as e:
+            elapsed = time.time() - start_time
+            logger.error(f"!!! REQUEST FAILED: {route_name} | Duration: {elapsed:.3f}s | Error: {str(e)}")
+            raise
+
+    return decorated_function
+
 # Simple auth decorator
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'logged_in' not in session:
+            logger.debug(f"Login required - redirecting to login page")
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
@@ -27,22 +80,28 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'logged_in' not in session:
+            logger.debug(f"Admin required - not logged in, redirecting to login")
             return redirect(url_for('login'))
         if session.get('first_name', '').lower() != 'admin':
+            logger.warning(f"Admin required - user {session.get('first_name')} denied access")
             return redirect(url_for('index'))
         return f(*args, **kwargs)
     return decorated_function
 
 @app.route('/login', methods=['GET', 'POST'])
+@log_timing
 def login():
     if request.method == 'POST':
         first_name = request.form.get('first_name')
         password = request.form.get('password')
+        logger.debug(f"Login attempt for user: {first_name}")
 
         if authenticate_user(first_name, password):
             session['logged_in'] = True
             session['first_name'] = first_name
+            logger.info(f"User {first_name} logged in successfully")
             return redirect(url_for('index'))
+        logger.warning(f"Failed login attempt for user: {first_name}")
         return render_template('login.html', error='Invalid credentials')
     return render_template('login.html')
 
@@ -54,12 +113,16 @@ def logout():
 
 @app.route('/')
 @login_required
+@log_timing
 def index():
     # Get tasks for next 7 days
     today = datetime.now().date()
     end_date = today + timedelta(days=6)
+    logger.debug(f"Loading home page: {today} to {end_date}")
 
+    start = time.time()
     occurrences = get_tasks_for_date_range(today, end_date)
+    logger.debug(f"get_tasks_for_date_range completed: {time.time() - start:.3f}s | Found {len(occurrences)} occurrences")
 
     # Group by date
     days = {}
@@ -76,6 +139,7 @@ def index():
             days[occ['date']]['tasks'].append(occ)
 
     days_list = [{'date': k, 'data': v} for k, v in sorted(days.items())]
+    logger.debug(f"Rendering index.html with {len(days_list)} days")
 
     return render_template('index.html', days=days_list)
 
@@ -199,18 +263,25 @@ def edit_task_route(task_id):
 
 @app.route('/tasks/all')
 @login_required
+@log_timing
 def all_tasks():
     view = request.args.get('view', 'alphabetical')
     page = int(request.args.get('page', 1))
     show_all = request.args.get('show_all', '0') == '1'
+    logger.debug(f"all_tasks: view={view}, page={page}, show_all={show_all}")
 
     if view == 'alphabetical':
+        start = time.time()
         tasks = get_all_tasks_alphabetical()
+        logger.debug(f"get_all_tasks_alphabetical completed: {time.time() - start:.3f}s | {len(tasks)} tasks")
     else:
         # Chronological view - get all tasks with occurrences for next 6 months
         today = datetime.now().date()
         end_date = today + timedelta(days=180)
+        logger.debug(f"Loading chronological view: {today} to {end_date}")
+        start = time.time()
         occurrences = get_tasks_for_date_range(today, end_date)
+        logger.debug(f"get_tasks_for_date_range completed: {time.time() - start:.3f}s | {len(occurrences)} occurrences")
 
         tasks = []
         for occ in occurrences:

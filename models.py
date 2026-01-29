@@ -1,15 +1,21 @@
 import sqlite3
 import shutil
 import os
+import logging
+import time
 from datetime import datetime, timedelta
 from calendar import monthrange
 from config import Config
 
+logger = logging.getLogger(__name__)
+
 def backup_database():
     """Rotate database backups on startup (bak5 ← bak4 ← bak3 ← bak2 ← bak1 ← database.db)"""
+    start_time = time.time()
     db_path = Config.DATABASE
 
     if not os.path.exists(db_path):
+        logger.info("No database to backup yet")
         return  # No database to backup yet
 
     # Rotate existing backups (starting from oldest)
@@ -21,6 +27,8 @@ def backup_database():
 
     # Create bak1 from current database
     shutil.copy2(db_path, f"{db_path}.bak1")
+    elapsed = time.time() - start_time
+    logger.info(f"Database backed up: {db_path}.bak1 (took {elapsed:.3f}s)")
     print(f"Database backed up: {db_path}.bak1")
 
 def get_db():
@@ -126,15 +134,19 @@ def add_user(first_name, password):
 
 def authenticate_user(first_name, password):
     """Check if user credentials are valid (case-insensitive username and password)"""
+    start = time.time()
+    logger.debug(f"Authenticating user: {first_name}")
+
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM users WHERE LOWER(first_name) = LOWER(?)', (first_name,))
     user = cursor.fetchone()
     conn.close()
 
-    if user and user['password'].lower() == password.lower():
-        return True
-    return False
+    success = user and user['password'].lower() == password.lower()
+    logger.debug(f"Authentication result for {first_name}: {'SUCCESS' if success else 'FAILED'} ({time.time() - start:.3f}s)")
+
+    return success
 
 def get_ordinal(n):
     """Convert number to ordinal string (1st, 2nd, 3rd, etc.)"""
@@ -373,11 +385,16 @@ def get_schedule_description(schedule):
 
 def get_all_tasks_alphabetical():
     """Get all tasks alphabetically"""
+    start = time.time()
+    logger.debug("get_all_tasks_alphabetical called")
+
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM tasks ORDER BY title')
     tasks = cursor.fetchall()
+    logger.debug(f"  Fetched {len(tasks)} tasks")
 
+    query_count = 0
     task_list = []
     for task in tasks:
         # Get assignment info
@@ -389,6 +406,7 @@ def get_all_tasks_alphabetical():
                 # Get user names
                 user_names = []
                 for user_id in assigned_users:
+                    query_count += 1
                     cursor.execute('SELECT first_name FROM users WHERE id = ?', (user_id,))
                     user = cursor.fetchone()
                     if user:
@@ -408,6 +426,9 @@ def get_all_tasks_alphabetical():
         })
 
     conn.close()
+    elapsed = time.time() - start
+    logger.info(f"get_all_tasks_alphabetical completed: {elapsed:.3f}s | Tasks: {len(task_list)} | User queries: {query_count}")
+
     return task_list
 
 def calculate_next_occurrence(schedule, from_date):
@@ -517,14 +538,24 @@ def calculate_next_occurrence(schedule, from_date):
 
 def get_tasks_for_date_range(start_date, end_date):
     """Get all task occurrences within a date range"""
+    func_start = time.time()
+    logger.debug(f"get_tasks_for_date_range: {start_date} to {end_date}")
+
     conn = get_db()
     cursor = conn.cursor()
+
+    query_start = time.time()
     cursor.execute('SELECT * FROM tasks ORDER BY title')
     tasks = cursor.fetchall()
+    logger.debug(f"  Query: Fetched {len(tasks)} tasks ({time.time() - query_start:.3f}s)")
 
     occurrences = []
+    query_count = 0
 
-    for task in tasks:
+    for idx, task in enumerate(tasks):
+        task_start = time.time()
+        logger.debug(f"  Processing task {idx+1}/{len(tasks)}: {task['title']}")
+
         # Get assignment info
         if task['for_everyone']:
             assigned_to = 'Everyone'
@@ -534,6 +565,7 @@ def get_tasks_for_date_range(start_date, end_date):
                 # Get user names
                 user_names = []
                 for user_id in assigned_users:
+                    query_count += 1
                     cursor.execute('SELECT first_name FROM users WHERE id = ?', (user_id,))
                     user = cursor.fetchone()
                     if user:
@@ -543,8 +575,11 @@ def get_tasks_for_date_range(start_date, end_date):
                 assigned_to = 'Nobody'
 
         schedules = get_schedules(task['id'])
+        logger.debug(f"    Found {len(schedules)} schedule(s) for task {task['title']}")
+
         for schedule in schedules:
             current_date = start_date
+            occurrence_count = 0
             while current_date <= end_date:
                 next_occ = calculate_next_occurrence(schedule, current_date)
                 if next_occ and next_occ <= end_date:
@@ -554,12 +589,21 @@ def get_tasks_for_date_range(start_date, end_date):
                         'task_title': task['title'],
                         'assigned_to': assigned_to
                     })
+                    occurrence_count += 1
                     current_date = next_occ + timedelta(days=1)
                 else:
                     break
+            if occurrence_count > 0:
+                logger.debug(f"    Schedule generated {occurrence_count} occurrence(s)")
+
+        logger.debug(f"  Task {task['title']} processed in {time.time() - task_start:.3f}s")
 
     conn.close()
     occurrences.sort(key=lambda x: x['date'])
+
+    elapsed = time.time() - func_start
+    logger.info(f"get_tasks_for_date_range completed: {elapsed:.3f}s | Tasks: {len(tasks)} | User queries: {query_count} | Occurrences: {len(occurrences)}")
+
     return occurrences
 
 if __name__ == '__main__':
