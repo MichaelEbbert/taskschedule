@@ -10,7 +10,7 @@ from models import (
     get_task_assignments, delete_task, add_schedule, get_schedules, delete_schedule,
     get_schedule_description, get_all_tasks_alphabetical, get_tasks_for_date_range,
     calculate_next_occurrence, get_ordinal, get_user_by_id, update_user_password,
-    backup_database
+    delete_user, backup_database
 )
 
 app = Flask(__name__)
@@ -374,6 +374,14 @@ def edit_user(user_id):
             return redirect(url_for('admin_users'))
 
     return render_template('edit_user.html', user=user)
+
+@app.route('/admin/users/<int:user_id>/delete', methods=['POST'])
+@admin_required
+def delete_user_route(user_id):
+    user = get_user_by_id(user_id)
+    if user and user['first_name'].lower() != 'admin':
+        delete_user(user_id)
+    return redirect(url_for('admin_users'))
 
 @app.context_processor
 def utility_processor():

@@ -218,6 +218,53 @@ def update_user_password(user_id, new_password):
     conn.commit()
     conn.close()
 
+def delete_user(user_id):
+    """Delete a user and handle their tasks/assignments.
+
+    - Delete tasks created by this user
+    - Unassign this user from tasks they're assigned to
+    - Delete any tasks that now have no assignments (and aren't for_everyone)
+    """
+    conn = get_db()
+    cursor = conn.cursor()
+
+    # Get the user's first_name for matching created_by
+    cursor.execute('SELECT first_name FROM users WHERE id = ?', (user_id,))
+    user = cursor.fetchone()
+    if not user:
+        conn.close()
+        return
+
+    user_name = user['first_name']
+
+    # Delete tasks created by this user
+    cursor.execute('DELETE FROM tasks WHERE created_by = ?', (user_name,))
+
+    # Remove this user from task_assignments
+    cursor.execute('DELETE FROM task_assignments WHERE user_id = ?', (user_id,))
+
+    # Find tasks that now have no assignments and are not for_everyone
+    cursor.execute('''
+        SELECT t.id FROM tasks t
+        WHERE t.for_everyone = 0
+        AND NOT EXISTS (
+            SELECT 1 FROM task_assignments ta WHERE ta.task_id = t.id
+        )
+    ''')
+    orphaned_tasks = cursor.fetchall()
+
+    # Delete orphaned tasks
+    for task in orphaned_tasks:
+        cursor.execute('DELETE FROM tasks WHERE id = ?', (task['id'],))
+
+    # Delete the user
+    cursor.execute('DELETE FROM users WHERE id = ?', (user_id,))
+
+    conn.commit()
+    conn.close()
+
+    return len(orphaned_tasks)
+
 def create_task(title, description, for_everyone, user_ids=None, created_by=None):
     """Create a new task"""
     title = normalize_task_title(title)
