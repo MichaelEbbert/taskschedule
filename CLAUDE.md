@@ -26,3 +26,6 @@ cd /home/ec2-user/taskschedule
 git pull origin main
 sudo systemctl restart taskschedule
 ```
+
+## Nginx Authentication
+See `C:\claude_projects\recipeshoppinglist\CLAUDE.md` for instructions on nginx-level auth to protect all deployed apps.

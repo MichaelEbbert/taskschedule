@@ -1,0 +1,299 @@
+2026-02-02 23:46:11 [INFO] [__main__] ============================================================
+2026-02-02 23:46:11 [INFO] [__main__] Flask application starting up
+2026-02-02 23:46:11 [INFO] [__main__] ============================================================
+2026-02-02 23:46:11 [INFO] [models] Database backed up: database.db.bak1 (took 0.004s)
+2026-02-02 23:46:11 [INFO] [werkzeug] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.142:5000
+2026-02-02 23:46:11 [INFO] [werkzeug] [33mPress CTRL+C to quit[0m
+2026-02-02 23:46:11 [INFO] [werkzeug]  * Restarting with stat
+2026-02-02 23:46:11 [INFO] [__main__] ============================================================
+2026-02-02 23:46:11 [INFO] [__main__] Flask application starting up
+2026-02-02 23:46:11 [INFO] [__main__] ============================================================
+2026-02-02 23:46:11 [INFO] [models] Database backed up: database.db.bak1 (took 0.004s)
+2026-02-02 23:46:11 [WARNING] [werkzeug]  * Debugger is active!
+2026-02-02 23:46:11 [INFO] [werkzeug]  * Debugger PIN: 226-174-991
+2026-02-02 23:46:25 [DEBUG] [__main__] Login required - redirecting to login page
+2026-02-02 23:46:25 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:46:25] "[32mGET / HTTP/1.1[0m" 302 -
+2026-02-02 23:46:25 [INFO] [__main__] >>> REQUEST START: login | User: anonymous | Method: GET
+2026-02-02 23:46:25 [INFO] [__main__] <<< REQUEST END: login | Duration: 0.027s
+2026-02-02 23:46:25 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:46:25] "GET /login HTTP/1.1" 200 -
+2026-02-02 23:46:26 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:46:26] "GET /static/js/main.js HTTP/1.1" 200 -
+2026-02-02 23:46:26 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:46:26] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-02-02 23:46:26 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:46:26] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-02-02 23:46:48 [INFO] [__main__] >>> REQUEST START: login | User: anonymous | Method: POST
+2026-02-02 23:46:48 [DEBUG] [__main__] Login attempt for user: admin
+2026-02-02 23:46:48 [DEBUG] [models] Authenticating user: admin
+2026-02-02 23:46:48 [DEBUG] [models] Authentication result for admin: SUCCESS (0.002s)
+2026-02-02 23:46:48 [INFO] [__main__] User admin logged in successfully
+2026-02-02 23:46:48 [INFO] [__main__] <<< REQUEST END: login | Duration: 0.013s
+2026-02-02 23:46:48 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:46:48] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-02 23:46:48 [INFO] [__main__] >>> REQUEST START: index | User: admin | Method: GET
+2026-02-02 23:46:48 [DEBUG] [__main__] Loading home page: 2026-02-02 to 2026-02-08
+2026-02-02 23:46:48 [DEBUG] [models] get_tasks_for_date_range: 2026-02-02 to 2026-02-08
+2026-02-02 23:46:48 [DEBUG] [models]   Query: Fetched 1 tasks (0.000s)
+2026-02-02 23:46:48 [DEBUG] [models]   Processing task 1/1: Trim cat nails
+2026-02-02 23:46:48 [DEBUG] [models]     Found 2 schedule(s) for task Trim cat nails
+2026-02-02 23:46:48 [DEBUG] [models]   Task Trim cat nails processed in 0.000s
+2026-02-02 23:46:48 [INFO] [models] get_tasks_for_date_range completed: 0.001s | Tasks: 1 | User queries: 0 | Occurrences: 0
+2026-02-02 23:46:48 [DEBUG] [__main__] get_tasks_for_date_range completed: 0.001s | Found 0 occurrences
+2026-02-02 23:46:48 [DEBUG] [__main__] Rendering index.html with 7 days
+2026-02-02 23:46:48 [INFO] [__main__] <<< REQUEST END: index | Duration: 0.011s
+2026-02-02 23:46:48 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:46:48] "GET / HTTP/1.1" 200 -
+2026-02-02 23:46:48 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:46:48] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:46:48 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:46:48] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:46:52 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:46:52] "GET /admin/users HTTP/1.1" 200 -
+2026-02-02 23:46:52 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:46:52] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:46:52 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:46:52] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:47:40 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:47:40] "GET /admin/users HTTP/1.1" 200 -
+2026-02-02 23:47:40 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:47:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:47:40 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:47:40] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:47:44 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:47:44] "GET /tasks/create HTTP/1.1" 200 -
+2026-02-02 23:47:44 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:47:44] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:47:44 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:47:44] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:48:19 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:48:19] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-02-02 23:48:19 [INFO] [__main__] >>> REQUEST START: login | User: anonymous | Method: GET
+2026-02-02 23:48:19 [INFO] [__main__] <<< REQUEST END: login | Duration: 0.000s
+2026-02-02 23:48:19 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:48:19] "GET /login HTTP/1.1" 200 -
+2026-02-02 23:48:19 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:48:19] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:48:19 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:48:19] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:48:28 [INFO] [__main__] >>> REQUEST START: login | User: anonymous | Method: POST
+2026-02-02 23:48:28 [DEBUG] [__main__] Login attempt for user: Deleteme
+2026-02-02 23:48:28 [DEBUG] [models] Authenticating user: Deleteme
+2026-02-02 23:48:28 [DEBUG] [models] Authentication result for Deleteme: SUCCESS (0.003s)
+2026-02-02 23:48:28 [INFO] [__main__] User Deleteme logged in successfully
+2026-02-02 23:48:28 [INFO] [__main__] <<< REQUEST END: login | Duration: 0.005s
+2026-02-02 23:48:28 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:48:28] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-02 23:48:28 [INFO] [__main__] >>> REQUEST START: index | User: Deleteme | Method: GET
+2026-02-02 23:48:28 [DEBUG] [__main__] Loading home page: 2026-02-02 to 2026-02-08
+2026-02-02 23:48:28 [DEBUG] [models] get_tasks_for_date_range: 2026-02-02 to 2026-02-08
+2026-02-02 23:48:28 [DEBUG] [models]   Query: Fetched 1 tasks (0.000s)
+2026-02-02 23:48:28 [DEBUG] [models]   Processing task 1/1: Trim cat nails
+2026-02-02 23:48:28 [DEBUG] [models]     Found 2 schedule(s) for task Trim cat nails
+2026-02-02 23:48:28 [DEBUG] [models]   Task Trim cat nails processed in 0.000s
+2026-02-02 23:48:28 [INFO] [models] get_tasks_for_date_range completed: 0.001s | Tasks: 1 | User queries: 0 | Occurrences: 0
+2026-02-02 23:48:28 [DEBUG] [__main__] get_tasks_for_date_range completed: 0.001s | Found 0 occurrences
+2026-02-02 23:48:28 [DEBUG] [__main__] Rendering index.html with 7 days
+2026-02-02 23:48:28 [INFO] [__main__] <<< REQUEST END: index | Duration: 0.002s
+2026-02-02 23:48:28 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:48:28] "GET / HTTP/1.1" 200 -
+2026-02-02 23:48:28 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:48:28] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:48:28 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:48:28] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:48:33 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:48:33] "GET /tasks/create HTTP/1.1" 200 -
+2026-02-02 23:48:33 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:48:33] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:48:33 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:48:33] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:49:09 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:49:09] "[35m[1mPOST /tasks/create HTTP/1.1[0m" 500 -
+2026-02-02 23:49:09 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:49:09] "GET /tasks/create?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2026-02-02 23:49:09 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:49:09] "GET /tasks/create?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2026-02-02 23:49:09 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:49:09] "GET /tasks/create?__debugger__=yes&cmd=resource&f=console.png&s=kyDD64MARu9SWpMpIEGo HTTP/1.1" 200 -
+2026-02-02 23:49:09 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:49:09] "GET /tasks/create?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2026-02-02 23:50:20 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:50:20] "GET /tasks/create HTTP/1.1" 200 -
+2026-02-02 23:50:20 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:50:20] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:50:20 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:50:20] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:50:21 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:50:21] "GET /tasks/create HTTP/1.1" 200 -
+2026-02-02 23:50:21 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:50:21] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:50:21 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:50:21] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:50:56 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:50:56] "[32mPOST /tasks/create HTTP/1.1[0m" 302 -
+2026-02-02 23:50:56 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:50:56] "GET /tasks/2/edit HTTP/1.1" 200 -
+2026-02-02 23:50:56 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:50:56] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:50:56 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:50:56] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:51:20 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:51:20] "[32mPOST /tasks/2/edit HTTP/1.1[0m" 302 -
+2026-02-02 23:51:20 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:51:20] "GET /tasks/2/edit HTTP/1.1" 200 -
+2026-02-02 23:51:20 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:51:20] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:51:20 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:51:20] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:51:33 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:51:33] "GET /tasks/create HTTP/1.1" 200 -
+2026-02-02 23:51:33 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:51:33] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:51:33 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:51:33] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:51:54 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:51:54] "[32mPOST /tasks/create HTTP/1.1[0m" 302 -
+2026-02-02 23:51:54 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:51:54] "GET /tasks/3/edit HTTP/1.1" 200 -
+2026-02-02 23:51:54 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:51:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:51:54 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:51:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:52:00 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:00] "[32mPOST /tasks/3/edit HTTP/1.1[0m" 302 -
+2026-02-02 23:52:00 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:00] "GET /tasks/3/edit HTTP/1.1" 200 -
+2026-02-02 23:52:00 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:52:00 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:00] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:52:13 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:13] "GET /tasks/create HTTP/1.1" 200 -
+2026-02-02 23:52:14 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:52:14 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:14] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:52:38 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:38] "[32mPOST /tasks/create HTTP/1.1[0m" 302 -
+2026-02-02 23:52:38 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:38] "GET /tasks/4/edit HTTP/1.1" 200 -
+2026-02-02 23:52:38 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:52:38 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:38] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:52:44 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:44] "[32mPOST /tasks/4/edit HTTP/1.1[0m" 302 -
+2026-02-02 23:52:44 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:44] "GET /tasks/4/edit HTTP/1.1" 200 -
+2026-02-02 23:52:44 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:44] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:52:44 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:44] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:52:48 [INFO] [__main__] >>> REQUEST START: all_tasks | User: Deleteme | Method: GET
+2026-02-02 23:52:48 [DEBUG] [__main__] all_tasks: view=alphabetical, page=1, show_all=False
+2026-02-02 23:52:48 [DEBUG] [models] get_all_tasks_alphabetical called
+2026-02-02 23:52:48 [DEBUG] [models]   Fetched 4 tasks
+2026-02-02 23:52:48 [INFO] [models] get_all_tasks_alphabetical completed: 0.004s | Tasks: 4 | User queries: 6
+2026-02-02 23:52:48 [DEBUG] [__main__] get_all_tasks_alphabetical completed: 0.004s | 4 tasks
+2026-02-02 23:52:48 [INFO] [__main__] <<< REQUEST END: all_tasks | Duration: 0.029s
+2026-02-02 23:52:48 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:48] "GET /tasks/all HTTP/1.1" 200 -
+2026-02-02 23:52:48 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:48] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:52:48 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:52:48] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:53:01 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:01] "GET /tasks/2/edit HTTP/1.1" 200 -
+2026-02-02 23:53:01 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:53:01 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:01] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:53:10 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:10] "GET /about HTTP/1.1" 200 -
+2026-02-02 23:53:10 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:53:10 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:10] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:53:15 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:15] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-02-02 23:53:15 [INFO] [__main__] >>> REQUEST START: login | User: anonymous | Method: GET
+2026-02-02 23:53:15 [INFO] [__main__] <<< REQUEST END: login | Duration: 0.001s
+2026-02-02 23:53:15 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:15] "GET /login HTTP/1.1" 200 -
+2026-02-02 23:53:15 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:15] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:53:15 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:15] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:53:29 [INFO] [__main__] >>> REQUEST START: login | User: anonymous | Method: POST
+2026-02-02 23:53:29 [DEBUG] [__main__] Login attempt for user: admin
+2026-02-02 23:53:29 [DEBUG] [models] Authenticating user: admin
+2026-02-02 23:53:29 [DEBUG] [models] Authentication result for admin: SUCCESS (0.001s)
+2026-02-02 23:53:29 [INFO] [__main__] User admin logged in successfully
+2026-02-02 23:53:29 [INFO] [__main__] <<< REQUEST END: login | Duration: 0.002s
+2026-02-02 23:53:29 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:29] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-02 23:53:29 [INFO] [__main__] >>> REQUEST START: index | User: admin | Method: GET
+2026-02-02 23:53:29 [DEBUG] [__main__] Loading home page: 2026-02-02 to 2026-02-08
+2026-02-02 23:53:29 [DEBUG] [models] get_tasks_for_date_range: 2026-02-02 to 2026-02-08
+2026-02-02 23:53:29 [DEBUG] [models]   Query: Fetched 4 tasks (0.000s)
+2026-02-02 23:53:29 [DEBUG] [models]   Processing task 1/4: Task created by deleteme - assigned to D and D2
+2026-02-02 23:53:29 [DEBUG] [models]     Found 1 schedule(s) for task Task created by deleteme - assigned to D and D2
+2026-02-02 23:53:30 [DEBUG] [models]     Schedule generated 2 occurrence(s)
+2026-02-02 23:53:30 [DEBUG] [models]   Task Task created by deleteme - assigned to D and D2 processed in 0.022s
+2026-02-02 23:53:30 [DEBUG] [models]   Processing task 2/4: Task created by deleteme - assigned to D2 and michael
+2026-02-02 23:53:30 [DEBUG] [models]     Found 1 schedule(s) for task Task created by deleteme - assigned to D2 and michael
+2026-02-02 23:53:30 [DEBUG] [models]   Task Task created by deleteme - assigned to D2 and michael processed in 0.001s
+2026-02-02 23:53:30 [DEBUG] [models]   Processing task 3/4: Task created by deleteme - assigned to deidra and D
+2026-02-02 23:53:30 [DEBUG] [models]     Found 1 schedule(s) for task Task created by deleteme - assigned to deidra and D
+2026-02-02 23:53:30 [DEBUG] [models]   Task Task created by deleteme - assigned to deidra and D processed in 0.001s
+2026-02-02 23:53:30 [DEBUG] [models]   Processing task 4/4: Trim cat nails
+2026-02-02 23:53:30 [DEBUG] [models]     Found 2 schedule(s) for task Trim cat nails
+2026-02-02 23:53:30 [DEBUG] [models]   Task Trim cat nails processed in 0.000s
+2026-02-02 23:53:30 [INFO] [models] get_tasks_for_date_range completed: 0.026s | Tasks: 4 | User queries: 6 | Occurrences: 2
+2026-02-02 23:53:30 [DEBUG] [__main__] get_tasks_for_date_range completed: 0.026s | Found 2 occurrences
+2026-02-02 23:53:30 [DEBUG] [__main__] Rendering index.html with 7 days
+2026-02-02 23:53:30 [INFO] [__main__] <<< REQUEST END: index | Duration: 0.026s
+2026-02-02 23:53:30 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:30] "GET / HTTP/1.1" 200 -
+2026-02-02 23:53:30 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:30] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:53:30 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:30] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:53:33 [INFO] [__main__] >>> REQUEST START: all_tasks | User: admin | Method: GET
+2026-02-02 23:53:33 [DEBUG] [__main__] all_tasks: view=alphabetical, page=1, show_all=False
+2026-02-02 23:53:33 [DEBUG] [models] get_all_tasks_alphabetical called
+2026-02-02 23:53:33 [DEBUG] [models]   Fetched 4 tasks
+2026-02-02 23:53:33 [INFO] [models] get_all_tasks_alphabetical completed: 0.004s | Tasks: 4 | User queries: 6
+2026-02-02 23:53:33 [DEBUG] [__main__] get_all_tasks_alphabetical completed: 0.004s | 4 tasks
+2026-02-02 23:53:33 [INFO] [__main__] <<< REQUEST END: all_tasks | Duration: 0.004s
+2026-02-02 23:53:33 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:33] "GET /tasks/all HTTP/1.1" 200 -
+2026-02-02 23:53:33 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:33] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:53:33 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:33] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:53:35 [INFO] [__main__] >>> REQUEST START: index | User: admin | Method: GET
+2026-02-02 23:53:35 [DEBUG] [__main__] Loading home page: 2026-02-02 to 2026-02-08
+2026-02-02 23:53:35 [DEBUG] [models] get_tasks_for_date_range: 2026-02-02 to 2026-02-08
+2026-02-02 23:53:35 [DEBUG] [models]   Query: Fetched 4 tasks (0.000s)
+2026-02-02 23:53:35 [DEBUG] [models]   Processing task 1/4: Task created by deleteme - assigned to D and D2
+2026-02-02 23:53:35 [DEBUG] [models]     Found 1 schedule(s) for task Task created by deleteme - assigned to D and D2
+2026-02-02 23:53:35 [DEBUG] [models]     Schedule generated 2 occurrence(s)
+2026-02-02 23:53:35 [DEBUG] [models]   Task Task created by deleteme - assigned to D and D2 processed in 0.001s
+2026-02-02 23:53:35 [DEBUG] [models]   Processing task 2/4: Task created by deleteme - assigned to D2 and michael
+2026-02-02 23:53:35 [DEBUG] [models]     Found 1 schedule(s) for task Task created by deleteme - assigned to D2 and michael
+2026-02-02 23:53:35 [DEBUG] [models]   Task Task created by deleteme - assigned to D2 and michael processed in 0.001s
+2026-02-02 23:53:35 [DEBUG] [models]   Processing task 3/4: Task created by deleteme - assigned to deidra and D
+2026-02-02 23:53:35 [DEBUG] [models]     Found 1 schedule(s) for task Task created by deleteme - assigned to deidra and D
+2026-02-02 23:53:35 [DEBUG] [models]   Task Task created by deleteme - assigned to deidra and D processed in 0.002s
+2026-02-02 23:53:35 [DEBUG] [models]   Processing task 4/4: Trim cat nails
+2026-02-02 23:53:35 [DEBUG] [models]     Found 2 schedule(s) for task Trim cat nails
+2026-02-02 23:53:35 [DEBUG] [models]   Task Trim cat nails processed in 0.000s
+2026-02-02 23:53:35 [INFO] [models] get_tasks_for_date_range completed: 0.005s | Tasks: 4 | User queries: 6 | Occurrences: 2
+2026-02-02 23:53:35 [DEBUG] [__main__] get_tasks_for_date_range completed: 0.006s | Found 2 occurrences
+2026-02-02 23:53:35 [DEBUG] [__main__] Rendering index.html with 7 days
+2026-02-02 23:53:35 [INFO] [__main__] <<< REQUEST END: index | Duration: 0.006s
+2026-02-02 23:53:35 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:35] "GET / HTTP/1.1" 200 -
+2026-02-02 23:53:35 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:35] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:53:35 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:35] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:53:41 [INFO] [__main__] >>> REQUEST START: all_tasks | User: admin | Method: GET
+2026-02-02 23:53:41 [DEBUG] [__main__] all_tasks: view=alphabetical, page=1, show_all=False
+2026-02-02 23:53:41 [DEBUG] [models] get_all_tasks_alphabetical called
+2026-02-02 23:53:41 [DEBUG] [models]   Fetched 4 tasks
+2026-02-02 23:53:41 [INFO] [models] get_all_tasks_alphabetical completed: 0.004s | Tasks: 4 | User queries: 6
+2026-02-02 23:53:41 [DEBUG] [__main__] get_all_tasks_alphabetical completed: 0.004s | 4 tasks
+2026-02-02 23:53:41 [INFO] [__main__] <<< REQUEST END: all_tasks | Duration: 0.005s
+2026-02-02 23:53:41 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:41] "GET /tasks/all HTTP/1.1" 200 -
+2026-02-02 23:53:41 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:53:41 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:41] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:53:47 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:47] "GET /admin/users HTTP/1.1" 200 -
+2026-02-02 23:53:47 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:47] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:53:47 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:47] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:53:53 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:53] "[32mPOST /admin/users/17/delete HTTP/1.1[0m" 302 -
+2026-02-02 23:53:53 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:53] "GET /admin/users HTTP/1.1" 200 -
+2026-02-02 23:53:53 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:53] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:53:53 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:53] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:53:55 [INFO] [__main__] >>> REQUEST START: all_tasks | User: admin | Method: GET
+2026-02-02 23:53:55 [DEBUG] [__main__] all_tasks: view=alphabetical, page=1, show_all=False
+2026-02-02 23:53:55 [DEBUG] [models] get_all_tasks_alphabetical called
+2026-02-02 23:53:55 [DEBUG] [models]   Fetched 1 tasks
+2026-02-02 23:53:55 [INFO] [models] get_all_tasks_alphabetical completed: 0.002s | Tasks: 1 | User queries: 0
+2026-02-02 23:53:55 [DEBUG] [__main__] get_all_tasks_alphabetical completed: 0.002s | 1 tasks
+2026-02-02 23:53:55 [INFO] [__main__] <<< REQUEST END: all_tasks | Duration: 0.003s
+2026-02-02 23:53:55 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:55] "GET /tasks/all HTTP/1.1" 200 -
+2026-02-02 23:53:55 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:53:55 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:55] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:53:58 [INFO] [__main__] >>> REQUEST START: all_tasks | User: admin | Method: GET
+2026-02-02 23:53:58 [DEBUG] [__main__] all_tasks: view=chronological, page=1, show_all=False
+2026-02-02 23:53:58 [DEBUG] [__main__] Loading chronological view: 2026-02-02 to 2026-08-01
+2026-02-02 23:53:58 [DEBUG] [models] get_tasks_for_date_range: 2026-02-02 to 2026-08-01
+2026-02-02 23:53:58 [DEBUG] [models]   Query: Fetched 1 tasks (0.000s)
+2026-02-02 23:53:58 [DEBUG] [models]   Processing task 1/1: Trim cat nails
+2026-02-02 23:53:58 [DEBUG] [models]     Found 2 schedule(s) for task Trim cat nails
+2026-02-02 23:53:58 [DEBUG] [models]     Schedule generated 6 occurrence(s)
+2026-02-02 23:53:58 [DEBUG] [models]     Schedule generated 6 occurrence(s)
+2026-02-02 23:53:58 [DEBUG] [models]   Task Trim cat nails processed in 0.001s
+2026-02-02 23:53:58 [INFO] [models] get_tasks_for_date_range completed: 0.002s | Tasks: 1 | User queries: 0 | Occurrences: 12
+2026-02-02 23:53:58 [DEBUG] [__main__] get_tasks_for_date_range completed: 0.002s | 12 occurrences
+2026-02-02 23:53:58 [INFO] [__main__] <<< REQUEST END: all_tasks | Duration: 0.003s
+2026-02-02 23:53:58 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:58] "GET /tasks/all?view=chronological HTTP/1.1" 200 -
+2026-02-02 23:53:58 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:58] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:53:58 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:53:58] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:54:00 [INFO] [__main__] >>> REQUEST START: all_tasks | User: admin | Method: GET
+2026-02-02 23:54:00 [DEBUG] [__main__] all_tasks: view=alphabetical, page=1, show_all=False
+2026-02-02 23:54:00 [DEBUG] [models] get_all_tasks_alphabetical called
+2026-02-02 23:54:00 [DEBUG] [models]   Fetched 1 tasks
+2026-02-02 23:54:00 [INFO] [models] get_all_tasks_alphabetical completed: 0.001s | Tasks: 1 | User queries: 0
+2026-02-02 23:54:00 [DEBUG] [__main__] get_all_tasks_alphabetical completed: 0.001s | 1 tasks
+2026-02-02 23:54:00 [INFO] [__main__] <<< REQUEST END: all_tasks | Duration: 0.002s
+2026-02-02 23:54:00 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:00] "GET /tasks/all?view=alphabetical HTTP/1.1" 200 -
+2026-02-02 23:54:00 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:00] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:54:00 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:00] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:54:10 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:10] "GET /admin/users HTTP/1.1" 200 -
+2026-02-02 23:54:10 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:10] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:54:10 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:10] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:54:14 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:14] "[32mPOST /admin/users/18/delete HTTP/1.1[0m" 302 -
+2026-02-02 23:54:14 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:14] "GET /admin/users HTTP/1.1" 200 -
+2026-02-02 23:54:14 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:54:14 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:14] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:54:17 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:17] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-02-02 23:54:17 [INFO] [__main__] >>> REQUEST START: login | User: anonymous | Method: GET
+2026-02-02 23:54:17 [INFO] [__main__] <<< REQUEST END: login | Duration: 0.000s
+2026-02-02 23:54:17 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:17] "GET /login HTTP/1.1" 200 -
+2026-02-02 23:54:17 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:17] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:54:17 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:54:17] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:58:40 [INFO] [__main__] >>> REQUEST START: login | User: anonymous | Method: GET
+2026-02-02 23:58:40 [INFO] [__main__] <<< REQUEST END: login | Duration: 0.001s
+2026-02-02 23:58:40 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:40] "GET /login HTTP/1.1" 200 -
+2026-02-02 23:58:40 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:40] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:58:40 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:40] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:58:41 [INFO] [__main__] >>> REQUEST START: login | User: anonymous | Method: GET
+2026-02-02 23:58:41 [INFO] [__main__] <<< REQUEST END: login | Duration: 0.001s
+2026-02-02 23:58:41 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:41] "GET /login HTTP/1.1" 200 -
+2026-02-02 23:58:41 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:41] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:58:41 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:41] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:58:42 [INFO] [__main__] >>> REQUEST START: login | User: anonymous | Method: GET
+2026-02-02 23:58:42 [INFO] [__main__] <<< REQUEST END: login | Duration: 0.000s
+2026-02-02 23:58:42 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:42] "GET /login HTTP/1.1" 200 -
+2026-02-02 23:58:42 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:42] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-02 23:58:42 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:42] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-02 23:58:43 [INFO] [__main__] >>> REQUEST START: login | User: anonymous | Method: GET
+2026-02-02 23:58:43 [INFO] [__main__] <<< REQUEST END: login | Duration: 0.000s
+2026-02-02 23:58:43 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:43] "GET /login HTTP/1.1" 200 -
+2026-02-02 23:58:43 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:43] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-02-02 23:58:43 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:43] "GET /static/js/main.js HTTP/1.1" 200 -
+2026-02-02 23:58:43 [INFO] [werkzeug] 127.0.0.1 - - [02/Feb/2026 23:58:43] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
