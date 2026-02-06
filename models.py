@@ -9,6 +9,8 @@ from config import Config
 
 logger = logging.getLogger(__name__)
 
+os.makedirs(os.path.dirname(Config.DATABASE) or '.', exist_ok=True)
+
 def backup_database():
     """Rotate database backups on startup (bak5 ← bak4 ← bak3 ← bak2 ← bak1 ← database.db)"""
     start_time = time.time()
