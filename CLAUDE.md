@@ -21,10 +21,15 @@ sudo journalctl -u taskschedule -f
 ```
 
 ## Deploy Updates
+
+Use the centralized deployment scripts in `C:\claude_projects\deployment-manager\`:
+
 ```bash
-cd /home/ec2-user/taskschedule
-git pull origin main
-sudo systemctl restart taskschedule
+cd C:\claude_projects\deployment-manager
+python deploy.py taskschedule       # Full deploy (sync + deps + restart)
+python status.py taskschedule       # Health check
+python restart.py taskschedule      # Quick restart
+python logs.py taskschedule -f      # Follow logs
 ```
 
 ## Nginx Authentication
